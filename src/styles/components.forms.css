@@ -1,0 +1,533 @@
+/* =============================================================================
+   fiftyyears — form component styles
+   Plain semantic classes (fy-*) consumed by the form React components in
+   src/components (checkbox, radio-group, slider, toggle-group,
+   segmented-control, tag-input, combobox, form). Kept in a separate file from
+   components.css to avoid write collisions. Every value derives from a token in
+   tokens.css — colors use the HSL-triplet tokens, e.g. hsl(var(--fy-primary))
+   and, with alpha, hsl(var(--fy-primary) / 0.15).
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   Checkbox
+   -------------------------------------------------------------------------- */
+.fy-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0;
+  background: hsl(var(--fy-bg));
+  color: hsl(var(--fy-primary-fg));
+  border: var(--fy-border-width) solid hsl(var(--fy-input));
+  border-radius: var(--fy-radius-sm);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition-property: background-color, border-color, box-shadow, color;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-checkbox:hover:not(:disabled) {
+  border-color: hsl(var(--fy-primary) / 0.6);
+}
+.fy-checkbox:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--fy-bg)), 0 0 0 4px hsl(var(--fy-ring) / 0.55);
+}
+.fy-checkbox[data-state="checked"] {
+  background: hsl(var(--fy-primary));
+  border-color: hsl(var(--fy-primary));
+}
+.fy-checkbox:disabled {
+  pointer-events: none;
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.fy-checkbox__indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.fy-checkbox__check {
+  width: 0.85rem;
+  height: 0.85rem;
+  stroke-width: 3;
+  pointer-events: none;
+}
+
+/* -----------------------------------------------------------------------------
+   Radio group
+   -------------------------------------------------------------------------- */
+.fy-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fy-space-2);
+}
+.fy-radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0;
+  background: hsl(var(--fy-bg));
+  border: var(--fy-border-width) solid hsl(var(--fy-input));
+  border-radius: var(--fy-radius-full);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-radio:hover:not(:disabled) {
+  border-color: hsl(var(--fy-primary) / 0.6);
+}
+.fy-radio:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--fy-bg)), 0 0 0 4px hsl(var(--fy-ring) / 0.55);
+}
+.fy-radio[data-state="checked"] {
+  border-color: hsl(var(--fy-primary));
+}
+.fy-radio:disabled {
+  pointer-events: none;
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.fy-radio__indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.fy-radio__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--fy-radius-full);
+  background: hsl(var(--fy-primary));
+}
+
+/* -----------------------------------------------------------------------------
+   Slider
+   -------------------------------------------------------------------------- */
+.fy-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 1.25rem;
+  touch-action: none;
+  user-select: none;
+}
+.fy-slider[data-disabled] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.fy-slider__track {
+  position: relative;
+  flex-grow: 1;
+  height: 0.375rem;
+  background: hsl(var(--fy-muted));
+  border-radius: var(--fy-radius-full);
+  cursor: pointer;
+}
+.fy-slider__range {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: hsl(var(--fy-primary));
+  border-radius: var(--fy-radius-full);
+}
+.fy-slider__thumb {
+  position: absolute;
+  top: 50%;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-left: -0.55rem;
+  transform: translateY(-50%);
+  background: hsl(var(--fy-bg));
+  border: var(--fy-border-width-strong) solid hsl(var(--fy-primary));
+  border-radius: var(--fy-radius-full);
+  box-shadow: var(--fy-shadow-sm);
+  cursor: grab;
+  transition-property: box-shadow, border-color;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-slider__thumb:active {
+  cursor: grabbing;
+}
+.fy-slider__thumb:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--fy-bg)), 0 0 0 4px hsl(var(--fy-ring) / 0.55);
+}
+
+/* -----------------------------------------------------------------------------
+   Toggle group
+   -------------------------------------------------------------------------- */
+.fy-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fy-space-1);
+  padding: var(--fy-space-1);
+  background: hsl(var(--fy-muted));
+  border-radius: var(--fy-radius);
+}
+.fy-toggle-group__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-width: 2rem;
+  height: 2rem;
+  padding-inline: 0.625rem;
+  background: transparent;
+  color: hsl(var(--fy-fg));
+  border: none;
+  border-radius: var(--fy-radius-sm);
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+  font-weight: var(--fy-weight-semibold);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition-property: background-color, color, box-shadow;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-toggle-group__item > svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+.fy-toggle-group__item:hover:not(:disabled) {
+  background: hsl(var(--fy-bg) / 0.6);
+  color: hsl(var(--fy-fg));
+}
+.fy-toggle-group__item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--fy-muted)), 0 0 0 4px hsl(var(--fy-ring) / 0.55);
+}
+.fy-toggle-group__item[data-state="on"] {
+  background: hsl(var(--fy-primary));
+  color: hsl(var(--fy-primary-fg));
+  box-shadow: var(--fy-shadow-sm);
+}
+.fy-toggle-group__item:disabled {
+  pointer-events: none;
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* -----------------------------------------------------------------------------
+   Segmented control
+   -------------------------------------------------------------------------- */
+.fy-segmented {
+  --fy-seg-gap: var(--fy-space-1);
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  gap: var(--fy-seg-gap);
+  padding: var(--fy-seg-gap);
+  background: hsl(var(--fy-muted));
+  border-radius: var(--fy-radius);
+  isolation: isolate;
+}
+.fy-segmented[data-disabled] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.fy-segmented__pill {
+  position: absolute;
+  top: var(--fy-seg-gap);
+  bottom: var(--fy-seg-gap);
+  z-index: -1;
+  background: hsl(var(--fy-bg));
+  border-radius: var(--fy-radius-sm);
+  box-shadow: var(--fy-shadow-sm);
+  transition-property: left, width;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-segmented__option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 3.5rem;
+  height: 1.9rem;
+  padding-inline: 0.875rem;
+  background: transparent;
+  color: hsl(var(--fy-muted-fg));
+  border: none;
+  border-radius: var(--fy-radius-sm);
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+  font-weight: var(--fy-weight-semibold);
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition-property: color;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-segmented__option:hover:not(:disabled) {
+  color: hsl(var(--fy-fg));
+}
+.fy-segmented__option:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--fy-muted)), 0 0 0 4px hsl(var(--fy-ring) / 0.55);
+}
+.fy-segmented__option[data-state="checked"] {
+  color: hsl(var(--fy-fg));
+}
+.fy-segmented__option:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* -----------------------------------------------------------------------------
+   Tag input
+   -------------------------------------------------------------------------- */
+.fy-tag-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: var(--fy-control-h);
+  padding: 0.3125rem var(--fy-space-2);
+  background: hsl(var(--fy-bg));
+  border: var(--fy-border-width) solid hsl(var(--fy-input));
+  border-radius: var(--fy-radius);
+  cursor: text;
+  transition-property: border-color, box-shadow;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-tag-input:focus-within {
+  border-color: hsl(var(--fy-ring));
+  box-shadow: 0 0 0 3px hsl(var(--fy-ring) / 0.15);
+}
+.fy-tag-input[data-disabled] {
+  opacity: 0.6;
+  pointer-events: none;
+  background: hsl(var(--fy-muted));
+}
+.fy-tag-input__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fy-space-1);
+  height: 1.5rem;
+  padding-inline: var(--fy-space-2);
+  background: hsl(var(--fy-primary) / 0.12);
+  color: hsl(var(--fy-primary));
+  border-radius: var(--fy-radius-sm);
+  font-family: var(--fy-font-mono);
+  font-size: var(--fy-text-xs);
+  font-weight: var(--fy-weight-medium);
+  line-height: 1;
+}
+.fy-tag-input__chip-label {
+  white-space: nowrap;
+}
+.fy-tag-input__chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.9rem;
+  height: 0.9rem;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: var(--fy-radius-full);
+  cursor: pointer;
+  opacity: 0.75;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: opacity var(--fy-duration) var(--fy-ease),
+    background-color var(--fy-duration) var(--fy-ease);
+}
+.fy-tag-input__chip-remove:hover {
+  opacity: 1;
+  background: hsl(var(--fy-primary) / 0.2);
+}
+.fy-tag-input__chip-remove:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--fy-ring) / 0.55);
+}
+.fy-tag-input__chip-remove > svg {
+  width: 0.7rem;
+  height: 0.7rem;
+  stroke-width: 2.5;
+  pointer-events: none;
+}
+.fy-tag-input__field {
+  flex: 1 1 6ch;
+  min-width: 6ch;
+  height: 1.5rem;
+  padding: 0;
+  background: transparent;
+  color: hsl(var(--fy-fg));
+  border: none;
+  outline: none;
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-base);
+}
+.fy-tag-input__field::placeholder {
+  color: hsl(var(--fy-muted-fg));
+}
+
+/* -----------------------------------------------------------------------------
+   Combobox
+   -------------------------------------------------------------------------- */
+.fy-combobox {
+  position: relative;
+  width: 100%;
+}
+.fy-combobox__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.fy-combobox__input {
+  width: 100%;
+  height: var(--fy-control-h);
+  padding: 0 2rem 0 var(--fy-control-px);
+  background: hsl(var(--fy-bg));
+  color: hsl(var(--fy-fg));
+  border: var(--fy-border-width) solid hsl(var(--fy-input));
+  border-radius: var(--fy-radius);
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-base);
+  outline: none;
+  transition-property: border-color, box-shadow;
+  transition-duration: var(--fy-duration);
+  transition-timing-function: var(--fy-ease);
+}
+.fy-combobox__input::placeholder {
+  color: hsl(var(--fy-muted-fg));
+}
+.fy-combobox__input:focus-visible {
+  border-color: hsl(var(--fy-ring));
+  box-shadow: 0 0 0 3px hsl(var(--fy-ring) / 0.15);
+}
+.fy-combobox__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: hsl(var(--fy-muted));
+}
+.fy-combobox__icon {
+  position: absolute;
+  right: 0.625rem;
+  width: 1rem;
+  height: 1rem;
+  color: hsl(var(--fy-muted-fg));
+  pointer-events: none;
+}
+.fy-combobox__list {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + var(--fy-space-1));
+  left: 0;
+  width: 100%;
+  max-height: 15rem;
+  margin: 0;
+  padding: var(--fy-space-1);
+  overflow-y: auto;
+  list-style: none;
+  background: hsl(var(--fy-card));
+  color: hsl(var(--fy-card-fg));
+  border: var(--fy-border-width) solid hsl(var(--fy-border));
+  border-radius: var(--fy-radius);
+  box-shadow: var(--fy-shadow-lg);
+}
+.fy-combobox__empty {
+  padding: var(--fy-space-2) 0.625rem;
+  color: hsl(var(--fy-muted-fg));
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+}
+.fy-combobox__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fy-space-2);
+  padding: 0.4375rem 0.625rem;
+  border-radius: var(--fy-radius-sm);
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-base);
+  cursor: pointer;
+  user-select: none;
+}
+.fy-combobox__option[data-active="true"] {
+  background: hsl(var(--fy-muted));
+}
+.fy-combobox__option[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.fy-combobox__option-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fy-combobox__check {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  color: hsl(var(--fy-primary));
+  stroke-width: 2.5;
+}
+
+/* -----------------------------------------------------------------------------
+   Form primitives
+   -------------------------------------------------------------------------- */
+.fy-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.fy-form__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.fy-form__label {
+  color: hsl(var(--fy-fg));
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+  font-weight: var(--fy-weight-semibold);
+  line-height: 1.25rem;
+}
+.fy-form__hint {
+  margin: 0;
+  color: hsl(var(--fy-muted-fg));
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+  line-height: 1.2rem;
+}
+.fy-form__control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.fy-form__error {
+  margin: 0;
+  color: hsl(var(--fy-danger));
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+  line-height: 1.2rem;
+}

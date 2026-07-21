@@ -1,0 +1,70 @@
+/* fiftyyears — theme control components (ModeControl / ThemeControl /
+   DensityControl). Token-driven, layout-free; apps position them freely. */
+
+.fy-mode-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fy-space-2);
+  height: var(--fy-control-h-sm);
+  padding: 0 var(--fy-control-px-sm);
+  border: var(--fy-border-width) solid hsl(var(--fy-border));
+  border-radius: var(--fy-radius);
+  background: hsl(var(--fy-card));
+  color: hsl(var(--fy-fg));
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+  cursor: pointer;
+  transition: background-color var(--fy-duration) var(--fy-ease),
+    border-color var(--fy-duration) var(--fy-ease);
+}
+.fy-mode-control:hover {
+  background: hsl(var(--fy-muted));
+}
+.fy-mode-control:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--fy-bg)), 0 0 0 4px hsl(var(--fy-ring) / 0.55);
+}
+.fy-mode-control__label {
+  text-transform: capitalize;
+}
+
+.fy-theme-control,
+.fy-density-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fy-space-2);
+  height: var(--fy-control-h-sm);
+  padding-inline: var(--fy-control-px-sm);
+  border: var(--fy-border-width) solid hsl(var(--fy-border));
+  border-radius: var(--fy-radius);
+  background: hsl(var(--fy-card));
+}
+.fy-theme-control:focus-within,
+.fy-density-control:focus-within {
+  border-color: hsl(var(--fy-ring));
+  box-shadow: 0 0 0 3px hsl(var(--fy-ring) / 0.22);
+}
+.fy-theme-control__swatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--fy-radius-full);
+  box-shadow: inset 0 0 0 1px hsl(var(--fy-fg) / 0.12);
+  flex: none;
+}
+.fy-theme-control__select,
+.fy-density-control__select {
+  border: none;
+  background: transparent;
+  color: hsl(var(--fy-fg));
+  font-family: var(--fy-font-ui);
+  font-size: var(--fy-text-sm);
+  font-weight: var(--fy-weight-medium);
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+.fy-theme-control__select option,
+.fy-density-control__select option {
+  background: hsl(var(--fy-card));
+  color: hsl(var(--fy-fg));
+}

@@ -1,0 +1,209 @@
+/* =============================================================================
+   fiftyyears — design tokens
+   The single source of truth. Every component reads these; no component
+   hardcodes a color, size, weight, radius, or border. Change values here and
+   the whole system re-skins — this is what makes a theme a THEME and not a
+   recolor.
+
+   A theme can change any of: color, type family + scale + weight, density
+   (spacing + control sizing), radius, border weight, and elevation style
+   (shadow vs flat). Presets that touch these axes look like different products,
+   not one product repainted.
+
+   Modes: light is the default on :root. Dark applies under .dark, or the OS
+   preference when no explicit class is set.
+   ============================================================================= */
+
+:root {
+  /* =========================================================================
+     COLOR
+     ========================================================================= */
+  --fy-bg: 0 0% 100%;
+  --fy-fg: 224 17% 12%;
+  --fy-card: 0 0% 100%;
+  --fy-card-fg: 224 17% 12%;
+  --fy-muted: 220 14% 96%;
+  --fy-muted-fg: 220 9% 46%;
+  --fy-border: 220 13% 91%;
+  --fy-input: 220 13% 88%;
+
+  --fy-primary: 222 80% 58%;
+  --fy-primary-fg: 0 0% 100%;
+  --fy-ring: 222 80% 58%;
+
+  --fy-ok: 142 71% 42%;
+  --fy-ok-fg: 0 0% 100%;
+  --fy-warn: 33 92% 44%;
+  --fy-warn-fg: 0 0% 100%;
+  --fy-danger: 0 72% 51%;
+  --fy-danger-fg: 0 0% 100%;
+
+  /* =========================================================================
+     TYPOGRAPHY
+     Families, a real size scale, weights, tracking, and line-heights. A theme
+     can go all-mono, serif-headed, tight, or loose by changing these.
+     ========================================================================= */
+  --fy-font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --fy-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* The family UI text uses. A theme may point this at the mono or a serif. */
+  --fy-font-ui: var(--fy-font-sans);
+  /* The family headings use. */
+  --fy-font-heading: var(--fy-font-sans);
+  /* The family small uppercase labels/eyebrows use. A theme may point this at
+     the mono for a serif-heading + mono-label contrast (Editorial, Signal). */
+  --fy-font-label: var(--fy-font-ui);
+
+  /* type scale (rem) */
+  --fy-text-xs: 0.75rem;
+  --fy-text-sm: 0.8125rem;
+  --fy-text-base: 0.875rem;
+  --fy-text-md: 0.9375rem;
+  --fy-text-lg: 1.0625rem;
+  --fy-text-xl: 1.375rem;
+  --fy-text-2xl: 1.75rem;
+
+  /* weights — a theme can make the whole system lighter or heavier */
+  --fy-weight-normal: 400;
+  --fy-weight-medium: 500;
+  --fy-weight-semibold: 600;
+  --fy-weight-bold: 700;
+  /* weight for large display headings — Editorial sets this to 400 (big+light);
+     defaults to semibold so ordinary UIs keep firm headings. */
+  --fy-weight-heading: var(--fy-weight-semibold);
+
+  /* tracking + leading */
+  --fy-tracking-tight: -0.01em;
+  --fy-tracking-normal: 0em;
+  --fy-tracking-wide: 0.04em;
+  --fy-tracking-caps: 0.1em;
+  --fy-leading-tight: 1.25;
+  --fy-leading-normal: 1.55;
+
+  /* =========================================================================
+     DENSITY / SPACING
+     One multiplier — --fy-density — scales spacing, control heights, and card
+     padding together. This is the single knob for compact vs comfortable:
+       compact ≈ 0.85,  cozy (default) = 1,  comfortable ≈ 1.15,  spacious ≈ 1.3
+     Themes may still override any derived token directly (e.g. Kiosk sets big
+     control heights), and a theme's own --fy-space-unit still works. Density is
+     an INDEPENDENT axis layered on top: set --fy-density and everything below
+     rescales, without touching color/type/radius.
+     ========================================================================= */
+  /* Density is a product of two independent multipliers:
+       --fy-theme-density  the theme's intrinsic scale (Kiosk is big, etc.)
+       --fy-user-density   the user's Compact→Spacious choice
+     Every theme therefore still responds to the density control — a bigger
+     theme just starts from a bigger base and scales from there. */
+  --fy-theme-density: 1;
+  --fy-user-density: 1;
+  --fy-density: calc(var(--fy-theme-density) * var(--fy-user-density));
+
+  /* base (cozy) values, then scaled by density */
+  --fy-space-base: 0.25rem;
+  --fy-space-unit: calc(var(--fy-space-base) * var(--fy-density));
+  --fy-space-1: calc(var(--fy-space-unit) * 1);
+  --fy-space-2: calc(var(--fy-space-unit) * 2);
+  --fy-space-3: calc(var(--fy-space-unit) * 3);
+  --fy-space-4: calc(var(--fy-space-unit) * 4);
+  --fy-space-5: calc(var(--fy-space-unit) * 5);
+  --fy-space-6: calc(var(--fy-space-unit) * 6);
+  --fy-space-8: calc(var(--fy-space-unit) * 8);
+
+  /* control sizing — base heights scaled by density */
+  --fy-control-h-sm: calc(1.75rem * var(--fy-density));
+  --fy-control-h: calc(2.25rem * var(--fy-density));
+  --fy-control-h-lg: calc(2.75rem * var(--fy-density));
+  --fy-control-px: calc(0.9rem * var(--fy-density));
+  --fy-control-px-sm: calc(0.65rem * var(--fy-density));
+  /* padding inside cards/panels — scales with density */
+  --fy-pad-card: calc(1.125rem * var(--fy-density));
+
+  /* =========================================================================
+     RADIUS
+     ========================================================================= */
+  --fy-radius: 0.6rem;
+  --fy-radius-sm: max(0px, calc(var(--fy-radius) - 0.25rem));
+  --fy-radius-lg: calc(var(--fy-radius) + 0.25rem);
+  --fy-radius-full: 999px;
+
+  /* =========================================================================
+     BORDER
+     Width is a token so a theme can be hairline, standard, or heavy-bordered.
+     ========================================================================= */
+  --fy-border-width: 1px;
+  --fy-border-width-strong: 2px;
+
+  /* =========================================================================
+     STATUS DOT — size + glow intensity are tokens so a theme can make status
+     indicators big and lit (Signal Desk) or small and subtle (Foundation).
+     --fy-dot-glow is the blur radius of the colored halo; 0 = flat ring only.
+     ========================================================================= */
+  --fy-dot-size: 8px;
+  --fy-dot-glow: 0px;
+
+  /* =========================================================================
+     ELEVATION
+     Shadow tokens. A "flat" theme sets these to none and leans on borders; a
+     "soft" theme makes them prominent.
+     ========================================================================= */
+  --fy-shadow-sm: 0 1px 2px hsl(224 17% 12% / 0.05);
+  --fy-shadow: 0 1px 3px hsl(224 17% 12% / 0.08), 0 1px 2px hsl(224 17% 12% / 0.04);
+  --fy-shadow-lg: 0 12px 28px -6px hsl(224 17% 12% / 0.16);
+
+  /* =========================================================================
+     MOTION
+     ========================================================================= */
+  --fy-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --fy-duration: 160ms;
+}
+
+.dark {
+  --fy-bg: 224 24% 9%;
+  --fy-fg: 220 20% 92%;
+  --fy-card: 224 20% 12%;
+  --fy-card-fg: 220 20% 92%;
+  --fy-muted: 223 17% 18%;
+  --fy-muted-fg: 220 12% 62%;
+  --fy-border: 223 15% 23%;
+  --fy-input: 223 15% 26%;
+
+  --fy-primary: 222 85% 65%;
+  --fy-primary-fg: 224 24% 9%;
+  --fy-ring: 222 85% 65%;
+
+  --fy-ok: 142 62% 47%;
+  --fy-ok-fg: 224 24% 9%;
+  --fy-warn: 33 85% 55%;
+  --fy-warn-fg: 224 24% 9%;
+  --fy-danger: 0 63% 55%;
+  --fy-danger-fg: 0 0% 100%;
+
+  --fy-shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.3);
+  --fy-shadow: 0 1px 3px hsl(0 0% 0% / 0.4);
+  --fy-shadow-lg: 0 12px 32px -6px hsl(0 0% 0% / 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --fy-bg: 224 24% 9%;
+    --fy-fg: 220 20% 92%;
+    --fy-card: 224 20% 12%;
+    --fy-card-fg: 220 20% 92%;
+    --fy-muted: 223 17% 18%;
+    --fy-muted-fg: 220 12% 62%;
+    --fy-border: 223 15% 23%;
+    --fy-input: 223 15% 26%;
+    --fy-primary: 222 85% 65%;
+    --fy-primary-fg: 224 24% 9%;
+    --fy-ring: 222 85% 65%;
+    --fy-ok: 142 62% 47%;
+    --fy-ok-fg: 224 24% 9%;
+    --fy-warn: 33 85% 55%;
+    --fy-warn-fg: 224 24% 9%;
+    --fy-danger: 0 63% 55%;
+    --fy-danger-fg: 0 0% 100%;
+    --fy-shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.3);
+    --fy-shadow: 0 1px 3px hsl(0 0% 0% / 0.4);
+    --fy-shadow-lg: 0 12px 32px -6px hsl(0 0% 0% / 0.55);
+  }
+}

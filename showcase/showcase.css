@@ -1,0 +1,55 @@
+/* Showcase-only chrome. Not part of the published library. */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: hsl(var(--fy-bg));
+  color: hsl(var(--fy-fg));
+  font-family: var(--fy-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.sc-bar {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 24px;
+  background: hsl(var(--fy-card) / 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid hsl(var(--fy-border));
+}
+.sc-brand { display: flex; align-items: center; gap: 9px; font-weight: 650; }
+.sc-mark {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: hsl(var(--fy-primary)); color: hsl(var(--fy-primary-fg));
+  display: grid; place-items: center; font-size: 12px;
+}
+.sc-tag { font-family: var(--fy-font-mono); font-size: 12px; color: hsl(var(--fy-muted-fg)); }
+.sc-wrap { max-width: 940px; margin: 0 auto; padding: 32px 24px 96px; }
+.sc-lede { color: hsl(var(--fy-muted-fg)); font-size: 14px; margin: 0 0 8px; max-width: 62ch; }
+.sc-sect { margin-top: 40px; }
+.sc-sect > h2 {
+  font-family: var(--fy-font-mono);
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: hsl(var(--fy-muted-fg)); margin: 0 0 14px;
+}
+.sc-sect > h3.sc-sub {
+  font-size: 13px; font-weight: 600;
+  color: hsl(var(--fy-fg)); margin: 22px 0 12px;
+}
+.sc-sect > h3.sc-sub:first-of-type { margin-top: 4px; }
+.sc-muted { color: hsl(var(--fy-muted-fg)); }
+.sc-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.sc-col { display: flex; flex-direction: column; gap: 14px; }
+.sc-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sc-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.sc-stat { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+@media (max-width: 640px) { .sc-grid2, .sc-grid3 { grid-template-columns: 1fr; } }
+
+/* Preset theme picker in the toolbar */
+.sc-preset { display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid hsl(var(--fy-border)); border-radius: var(--fy-radius);
+  padding: 0 10px 0 10px; height: 32px; background: hsl(var(--fy-card)); }
+.sc-preset__swatch { width: 12px; height: 12px; border-radius: 50%;
+  box-shadow: 0 0 0 1px hsl(var(--fy-fg) / 0.12) inset; flex: none; }
+.sc-preset__select { border: none; background: transparent; color: hsl(var(--fy-fg));
+  font-family: var(--fy-font-sans); font-size: 13px; font-weight: 500;
+  padding: 6px 4px; cursor: pointer; outline: none; }
+.sc-preset__label { font-size: 12px; color: hsl(var(--fy-muted-fg)); font-weight: 500; padding-left: 2px; }
